@@ -879,3 +879,62 @@ body {
         width: 100%;
     }
 }
+/* ================= FORMULARIO COMENTARIOS ================= */
+.comment-form-section {
+    padding: 3rem 0 5rem;
+    text-align: center;
+    background-color: var(--color-bg-secondary);
+}
+
+.form-title {
+    font-family: var(--font-title);
+    margin-bottom: 2rem;
+    color: var(--color-text-light);
+}
+
+.form-box {
+    max-width: 500px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 2rem;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 229, 255, 0.2);
+}
+
+/* Estrellas Interactivas */
+.star-rating {
+    font-size: 2rem;
+    color: #444; /* Color apagado */
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+}
+
+.star-rating .star.active {
+    color: #FFD700; /* Dorado encendido */
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.star-rating .star:hover,
+.star-rating .star:hover ~ .star {
+    color: #444; /* Truco CSS: al hacer hover, manejamos colores con JS */
+}
+
+/* Inputs del formulario */
+.neon-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid #333;
+    padding: 1rem;
+    color: white;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    font-family: var(--font-body);
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+.neon-input:focus {
+    border-color: var(--color-neon-blue);
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.1);
+}

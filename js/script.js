@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
        3. CONSULTA DE ESTADO (CONEXIÓN GOOGLE SHEETS)
     ========================================= */
     // CONEXIÓN CON TU GOOGLE SHEET (API ZEUS)
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxBstxBYHMHYQbjgzf0ohEUho-Ua2n1f9wuXsm80mNQ_OKtfkkM0PLhA3hIVpTugXfB/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzT53rll12oXQK3TLVe6hZGvImWX-VryRDb5KpuFf8qn4a8E2AIMiQyVHNwO8l9SlF6qA/exec";
 
     const trackingBtn = document.querySelector('.tracking-form button');
     // Seleccionamos los inputs por su ID nuevo
@@ -168,5 +168,131 @@ document.addEventListener('DOMContentLoaded', () => {
                     trackingBtn.disabled = false;
                 });
         });
+    }
+    /* =========================================
+       5. SISTEMA DE COMENTARIOS Y ESTRELLAS
+    ========================================= */
+    
+    // 1. Lógica de las Estrellas (Visual)
+    const stars = document.querySelectorAll('.star');
+    const ratingInput = document.getElementById('rating-value');
+
+    stars.forEach(star => {
+        star.addEventListener('click', () => {
+            const value = parseInt(star.getAttribute('data-value'));
+            ratingInput.value = value; // Guardamos el valor (1 al 5)
+            
+            // Pintamos las estrellas
+            stars.forEach(s => {
+                if (parseInt(s.getAttribute('data-value')) <= value) {
+                    s.classList.add('active');
+                } else {
+                    s.classList.remove('active');
+                }
+            });
+        });
+    });
+    
+    // Iniciar con 5 estrellas marcadas por defecto
+    stars.forEach(s => s.classList.add('active'));
+
+    // 2. Enviar el comentario
+    const btnEnviar = document.getElementById('btn-enviar-review');
+    
+    if (btnEnviar) {
+        btnEnviar.addEventListener('click', () => {
+            const nombre = document.getElementById('comment-name').value.trim();
+            const mensaje = document.getElementById('comment-text').value.trim();
+            const estrellas = ratingInput.value;
+
+            if (nombre === "" || mensaje === "") {
+                alert("Por favor completá tu nombre y el mensaje.");
+                return;
+            }
+
+            // Feedback visual de carga
+            const textoOriginal = btnEnviar.innerHTML;
+            btnEnviar.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> ENVIANDO...';
+            btnEnviar.disabled = true;
+
+            // Preparamos el paquete de datos
+            const datosReview = {
+                nombre: nombre,
+                mensaje: mensaje,
+                estrellas: estrellas
+            };
+
+            // Enviamos con POST (método especial para guardar)
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify(datosReview)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.resultado === "exito") {
+                    alert("¡Gracias! Tu comentario se guardó correctamente.");
+                    // Limpiamos el formulario
+                    document.getElementById('comment-name').value = "";
+                    document.getElementById('comment-text').value = "";
+                } else {
+                    alert("Hubo un error al guardar. Intenta de nuevo.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Error de conexión.");
+            })
+            .finally(() => {
+                btnEnviar.innerHTML = textoOriginal;
+                btnEnviar.disabled = false;
+            });
+        });
+    }
+    /* =========================================
+       6. CARGAR COMENTARIOS REALES
+    ========================================= */
+    const contenedorTestimonios = document.querySelector('.testimonials-grid');
+
+    if (contenedorTestimonios) {
+        // Pedimos los comentarios a Google Sheets
+        fetch(`${SCRIPT_URL}?action=comentarios`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.tipo === "comentarios" && data.datos.length > 0) {
+                    
+                    // Opcional: Si quieres borrar los testimonios de ejemplo, descomenta la siguiente línea:
+                    // contenedorTestimonios.innerHTML = ""; 
+
+                    // Creamos una tarjeta por cada comentario real
+                    data.datos.forEach(review => {
+                        // Generar estrellas dinámicas
+                        let estrellasHTML = '';
+                        for (let i = 1; i <= 5; i++) {
+                            if (i <= review.puntos) {
+                                estrellasHTML += '<i class="fa-solid fa-star"></i>'; // Estrella llena
+                            } else {
+                                estrellasHTML += '<i class="fa-regular fa-star"></i>'; // Estrella vacía
+                            }
+                        }
+
+                        // --- CÓDIGO CORREGIDO (Color Azul y Mensaje Correcto) ---
+                        const htmlReview = `
+                        <div class="review-card" style="border-left-color: #00e5ff;"> <div class="stars" style="color: #FFD700;">
+                                ${estrellasHTML}
+                            </div>
+                            <p class="review-text">"${review.mensaje}"</p> 
+                            <div class="reviewer">
+                                <span class="reviewer-name">${review.nombre}</span>
+                                <span class="reviewer-badge" style="background: rgba(0, 229, 255, 0.1); color: #00e5ff;">CLIENTE VERIFICADO</span>
+                            </div>
+                        </div>
+                        `;
+                        
+                        // Agregamos el comentario AL PRINCIPIO de la lista
+                        contenedorTestimonios.insertAdjacentHTML('afterbegin', htmlReview);
+                    });
+                }
+            })
+            .catch(error => console.error("Error cargando comentarios:", error));
     }
 });
