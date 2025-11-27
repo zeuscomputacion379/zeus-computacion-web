@@ -1,0 +1,468 @@
+/* ================= VARIABLES Y RESET ================= */
+:root {
+    --color-bg-main: #050505;   /* Negro casi puro */
+    --color-bg-secondary: #0a0a12; /* Un tono más azulado oscuro */
+    --color-neon-blue: #00e5ff; /* El color CIAN eléctrico de tus rayos */
+    --color-text-light: #ffffff;
+    --color-text-gray: #cccccc;
+    
+    --font-title: 'Orbitron', sans-serif; /* Fuente futurista */
+    --font-body: 'Montserrat', sans-serif; /* Fuente legible */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--color-bg-main);
+    color: var(--color-text-light);
+    font-family: var(--font-body);
+    overflow-x: hidden; /* Evita scroll horizontal por los efectos */
+}
+
+/* Utilidad para contenedores */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Texto efecto Neón */
+.text-neon {
+    color: var(--color-neon-blue);
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px); /* Efecto vidrio esmerilado */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(0, 229, 255, 0.1);
+}
+
+.nav-logo {
+    font-family: var(--font-title);
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--color-text-light);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--color-neon-blue);
+}
+
+.btn-nav-contact {
+    border: 1px solid var(--color-neon-blue);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+}
+
+/* ================= HERO SECTION ================= */
+.hero-section {
+    height: 100vh; /* Ocupa toda la pantalla */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative; /* Necesario para ubicar los circuitos absolutos */
+    
+    /* Fondo: Usamos tu imagen de degradado con una capa oscura encima */
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
+                url('../assets/img/bg-hero.jpg'); 
+    background-size: cover;
+    background-position: center;
+    padding-top: 60px; /* Espacio para la navbar fija */
+}
+
+/* Posicionamiento de los Circuitos */
+.circuit-deco {
+    position: absolute;
+    pointer-events: none; /* Para que no molesten al click */
+    opacity: 0.8;
+    width: 300px; /* Tamaño inicial, ajustable */
+    max-width: 40%;
+}
+
+.circuit-deco.top-left {
+    top: 60px;
+    left: 0;
+}
+
+.circuit-deco.bottom-right {
+    bottom: 0;
+    right: 0;
+}
+
+/* Contenido del Hero */
+.hero-content {
+    position: relative;
+    z-index: 2; /* Asegura que el texto esté sobre los circuitos */
+}
+
+.main-logo-img {
+    max-width: 250px; /* Tamaño del gato central */
+    width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 15px rgba(0, 229, 255, 0.3)); /* Resplandor suave al logo */
+}
+
+.hero-title {
+    font-family: var(--font-title);
+    font-size: 2.2rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-gray);
+    margin-bottom: 1.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ================= BOTONES ================= */
+.btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-family: var(--font-title);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: transparent;
+    color: var(--color-neon-blue);
+    border: 2px solid var(--color-neon-blue);
+}
+
+/* Efecto de brillo intenso al pasar el mouse */
+.glow-effect:hover {
+    background-color: var(--color-neon-blue);
+    color: #000; /* Texto negro para contraste al hacer hover */
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.7),
+                0 0 40px rgba(0, 229, 255, 0.4);
+}
+
+/* ================= RESPONSIVE (Celulares) ================= */
+@media (max-width: 768px) {
+    .navbar {
+        /* Esto asegura que el logo quede centrado */
+        justify-content: center; 
+        position: relative; /* Necesario para ubicar el botón flotante */
+    }
+    .nav-links {
+        display: none; /* Ocultamos menú en móviles por ahora */
+    }
+    .nav-logo {
+        margin: 0; /* Quitamos margenes automáticos para que no empujen nada */
+        z-index: 101; /* Aseguramos que se vea encima */
+    }
+    
+    .hero-title {
+        font-size: 2rem; /* Título más pequeño en celular */
+    }
+    
+    .circuit-deco {
+        width: 200px; /* Circuitos más pequeños */
+        opacity: 0.5; /* Menos intrusivos en pantalla chica */
+    }
+    .main-logo-img {
+        max-width: 200px;
+    }
+    .menu-toggle {
+        display: block; /* Hacemos que aparezca */
+        position: absolute; /* Lo sacamos del flujo normal */
+        right: 20px; /* Lo pegamos a 20px de la derecha */
+        top: 50%; /* A la mitad de la altura */
+        transform: translateY(-50%); /* Corrección fina para centrarlo exacto */
+        font-size: 1.8rem;
+        color: var(--color-text-light); /* Color blanco */
+        cursor: pointer;
+        z-index: 102; /* Siempre encima de todo */
+    }
+}
+
+/* ================= SECCIÓN SERVICIOS ================= */
+.services-section {
+    padding: 5rem 0;
+    background-color: var(--color-bg-main);
+    position: relative;
+}
+
+.section-title {
+    font-family: var(--font-title);
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--color-text-gray);
+    margin-bottom: 3rem;
+}
+
+/* La Cuadrícula (Grid) Inteligente */
+.services-grid {
+    display: grid;
+    /* Esto hace que las columnas se ajusten solas. Si hay espacio, caben 3, si no, 2 o 1 */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 2rem;
+    padding: 0 1rem;
+}
+
+/* Diseño de la Tarjeta */
+.service-card {
+    background: rgba(255, 255, 255, 0.03); /* Fondo semitransparente muy sutil */
+    border: 1px solid rgba(0, 229, 255, 0.2); /* Borde tenue inicial */
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+/* El Icono */
+.icon-box {
+    font-size: 3rem;
+    color: var(--color-text-light);
+    margin-bottom: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.service-card h3 {
+    font-family: var(--font-title);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--color-text-light);
+}
+
+.service-card p {
+    font-size: 0.95rem;
+    color: var(--color-text-gray);
+    line-height: 1.6;
+}
+
+/* === EFECTO HOVER (La Magia) === */
+.service-card:hover {
+    transform: translateY(-10px); /* La tarjeta flota hacia arriba */
+    border-color: var(--color-neon-blue); /* El borde se enciende */
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.2); /* Resplandor */
+    background: rgba(0, 229, 255, 0.05); /* El fondo se tiñe un poco de azul */
+}
+
+.service-card:hover .icon-box {
+    color: var(--color-neon-blue); /* El icono se prende */
+    text-shadow: 0 0 10px var(--color-neon-blue);
+}
+
+/* ================= FOOTER ================= */
+.footer-section {
+    background-color: #020202; /* Un negro aún más profundo para el final */
+    padding: 5rem 0 2rem;
+    border-top: 1px solid rgba(0, 229, 255, 0.1); /* Línea sutil arriba */
+}
+
+/* Cuadrícula de 3 columnas para el pie de página */
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-logo {
+    font-family: var(--font-title);
+    color: var(--color-text-light);
+    margin-bottom: 1rem;
+}
+
+.footer-text {
+    color: var(--color-text-gray);
+    line-height: 1.6;
+    font-size: 0.9rem;
+}
+
+.footer-col h4 {
+    font-family: var(--font-title);
+    color: var(--color-text-light);
+    margin-bottom: 1.2rem;
+    font-size: 1.1rem;
+}
+
+/* Listas de enlaces */
+.footer-links, .contact-list {
+    list-style: none;
+}
+
+.footer-links li, .contact-list li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: var(--color-text-gray);
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--color-neon-blue);
+}
+
+/* Enlaces de contacto con iconos */
+.contact-link {
+    text-decoration: none;
+    color: var(--color-text-gray);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.contact-link i {
+    font-size: 1.2rem;
+    color: var(--color-neon-blue); /* Iconos en azul neón */
+}
+
+.location {
+    color: var(--color-text-gray);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.location i {
+    color: var(--color-neon-blue);
+}
+
+/* Hover específico para WhatsApp e Instagram */
+.contact-link:hover {
+    color: var(--color-text-light);
+    transform: translateX(5px); /* Pequeño movimiento a la derecha */
+}
+
+.contact-link.whatsapp:hover i {
+    color: #25D366; /* Color oficial de WhatsApp al hacer hover */
+    text-shadow: 0 0 10px #25D366;
+}
+
+.contact-link.instagram:hover i {
+    color: #E1306C; /* Color oficial de Instagram al hacer hover */
+    text-shadow: 0 0 10px #E1306C;
+}
+
+/* Barra inferior de copyright */
+.footer-bar {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--color-text-gray);
+    font-size: 0.85rem;
+}
+
+/* Ajuste para móviles en el footer */
+@media (max-width: 768px) {
+    .footer-grid {
+        text-align: center; /* Centrar todo en celular */
+    }
+    .contact-link, .location {
+        justify-content: center; /* Centrar los iconos y texto */
+    }
+}
+/* ================= SECCIÓN SEGUIMIENTO ================= */
+.tracking-section {
+    padding: 4rem 0;
+    background-color: var(--color-bg-secondary); /* Un fondo un poco diferente al negro puro */
+    border-bottom: 1px solid rgba(0, 229, 255, 0.1);
+    text-align: center;
+}
+
+.tracking-container {
+    max-width: 800px; /* Más angosto para centrar la atención */
+}
+
+.tracking-content p {
+    color: var(--color-text-gray);
+    margin-bottom: 2rem;
+}
+
+.tracking-form {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap; /* Para que en celular baje el botón */
+}
+
+.tracking-input {
+    padding: 1rem 1.5rem;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: white;
+    font-family: var(--font-title);
+    font-size: 1.1rem;
+    width: 100%;
+    max-width: 300px;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+.tracking-input:focus {
+    border-color: var(--color-neon-blue);
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+}
+
+/* Ajuste responsive para el formulario */
+@media (max-width: 600px) {
+    .tracking-form {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .tracking-input {
+        max-width: 100%;
+        text-align: center;
+    }
+    
+    .tracking-form button {
+        width: 100%; /* Botón ancho en celular */
+    }
+}

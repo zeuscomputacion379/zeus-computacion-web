@@ -1,0 +1,881 @@
+/* ================= VARIABLES Y RESET ================= */
+:root {
+    --color-bg-main: #050505;   /* Negro casi puro */
+    --color-bg-secondary: #0a0a12; /* Un tono más azulado oscuro */
+    --color-neon-blue: #00e5ff; /* El color CIAN eléctrico de tus rayos */
+    --color-text-light: #ffffff;
+    --color-text-gray: #cccccc;
+    
+    --font-title: 'Orbitron', sans-serif; /* Fuente futurista */
+    --font-body: 'Montserrat', sans-serif; /* Fuente legible */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--color-bg-main);
+    color: var(--color-text-light);
+    font-family: var(--font-body);
+    overflow-x: hidden; /* Evita scroll horizontal */
+}
+
+/* Utilidad para contenedores */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Texto efecto Neón */
+.text-neon {
+    color: var(--color-neon-blue);
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(0, 229, 255, 0.1);
+}
+
+.nav-logo {
+    font-family: var(--font-title);
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    z-index: 101;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--color-text-light);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--color-neon-blue);
+}
+
+.btn-nav-contact {
+    border: 1px solid var(--color-neon-blue);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+}
+
+/* Botón Hamburguesa (Oculto en PC por defecto) */
+.menu-toggle {
+    display: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--color-text-light);
+}
+
+/* ================= HERO SECTION ================= */
+.hero-section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    
+    /* Fondo con degradado y capa oscura */
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
+                url('../assets/img/bg-hero.jpg'); 
+    background-size: cover;
+    background-position: center;
+    padding-top: 60px;
+}
+
+/* Circuitos Decorativos */
+.circuit-deco {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.8;
+    width: 300px;
+    max-width: 40%;
+}
+
+.circuit-deco.top-left {
+    top: 60px; /* Ajustado para que no lo tape la barra */
+    left: 0;
+}
+
+.circuit-deco.bottom-right {
+    bottom: 0;
+    right: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* Ajustes compactos del Hero */
+.main-logo-img {
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 0.5rem;
+    filter: drop-shadow(0 0 15px rgba(0, 229, 255, 0.3));
+}
+
+.hero-title {
+    font-family: var(--font-title);
+    font-size: 2.2rem;
+    line-height: 1.1;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+}
+
+.hero-subtitle {
+    font-size: 1rem;
+    color: var(--color-text-gray);
+    margin-bottom: 1.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ================= SECCIÓN SEGUIMIENTO (Tracking) ================= */
+.tracking-section {
+    padding: 4rem 0;
+    background-color: var(--color-bg-secondary);
+    border-bottom: 1px solid rgba(0, 229, 255, 0.1);
+    text-align: center;
+}
+
+.tracking-container {
+    max-width: 800px;
+}
+
+.tracking-content p {
+    color: var(--color-text-gray);
+    margin-bottom: 2rem;
+}
+
+.tracking-form {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.tracking-input {
+    padding: 1rem 1.5rem;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: white;
+    font-family: var(--font-title);
+    font-size: 1.1rem;
+    width: 100%;
+    max-width: 300px;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+.tracking-input:focus {
+    border-color: var(--color-neon-blue);
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+}
+
+/* ================= SECCIÓN SERVICIOS ================= */
+.services-section {
+    padding: 5rem 0;
+    background-color: var(--color-bg-main);
+    position: relative;
+}
+
+.section-title {
+    font-family: var(--font-title);
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--color-text-gray);
+    margin-bottom: 3rem;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 2rem;
+    padding: 0 1rem;
+}
+
+.service-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.icon-box {
+    font-size: 3rem;
+    color: var(--color-text-light);
+    margin-bottom: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.service-card h3 {
+    font-family: var(--font-title);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--color-text-light);
+}
+
+.service-card p {
+    font-size: 0.95rem;
+    color: var(--color-text-gray);
+    line-height: 1.6;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--color-neon-blue);
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+    background: rgba(0, 229, 255, 0.05);
+}
+
+.service-card:hover .icon-box {
+    color: var(--color-neon-blue);
+    text-shadow: 0 0 10px var(--color-neon-blue);
+}
+
+/* ================= BOTONES ================= */
+.btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-family: var(--font-title);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background-color: transparent;
+    color: var(--color-neon-blue);
+    border: 2px solid var(--color-neon-blue);
+}
+
+.glow-effect:hover {
+    background-color: var(--color-neon-blue);
+    color: #000;
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.7),
+                0 0 40px rgba(0, 229, 255, 0.4);
+}
+
+/* ================= WHATSAPP FLOTANTE ================= */
+.btn-whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #25D366;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-whatsapp-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #25D366;
+}
+
+/* ================= SOBRE NOSOTROS ================= */
+.about-section {
+    padding: 6rem 0;
+    background-color: var(--color-bg-secondary);
+    overflow: hidden; /* Para contener los brillos */
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dividir en 2 mitades */
+    gap: 4rem;
+    align-items: center;
+}
+
+.about-text p {
+    color: var(--color-text-gray);
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+/* Caja especial para la historia del gato */
+.cat-story {
+    background: rgba(0, 229, 255, 0.05);
+    border-left: 4px solid var(--color-neon-blue);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-radius: 0 10px 10px 0;
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.icon-cat {
+    font-size: 1.5rem;
+    color: var(--color-neon-blue);
+    margin-top: 5px;
+}
+
+.cat-story p {
+    margin-bottom: 0;
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+}
+
+/* Columna de Imagen */
+.about-image {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.img-zeus-real {
+    width: 100%;
+    max-width: 400px; /* Tamaño máximo */
+    position: relative;
+    z-index: 2;
+    /* Un borde sutil y sombra */
+    border-radius: 20px;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+    transition: transform 0.3s ease;
+}
+
+.img-zeus-real:hover {
+    transform: scale(1.02) rotate(2deg); /* Pequeño movimiento al pasar mouse */
+}
+
+/* Efecto de luz detrás de la imagen */
+.image-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    background: var(--color-neon-blue);
+    filter: blur(80px); /* Difuminado fuerte para crear "atmósfera" */
+    opacity: 0.2;
+    z-index: 1;
+    border-radius: 50%;
+}
+
+/* === RESPONSIVE PARA NOSOTROS === */
+@media (max-width: 768px) {
+    .about-grid {
+        grid-template-columns: 1fr; /* Una sola columna en celular */
+        text-align: center; /* Texto centrado */
+        gap: 3rem;
+    }
+
+    .section-title {
+        text-align: center !important; /* Forzamos centrado del título */
+    }
+
+    .cat-story {
+        text-align: left; /* La cajita del gato queda mejor alineada a la izq */
+        flex-direction: row;
+    }
+    
+    .about-image {
+        order: -1; /* Ponemos la imagen ARRIBA del texto en celular */
+    }
+    
+    .img-zeus-real {
+        max-width: 250px; /* Imagen más chica en móvil */
+    }
+}
+
+/* ================= TESTIMONIOS ================= */
+.testimonials-section {
+    padding: 5rem 0;
+    /* Un fondo sutilmente diferente para separar visualmente */
+    background: linear-gradient(to bottom, var(--color-bg-main), var(--color-bg-secondary));
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 0 1rem;
+}
+
+.review-card {
+    background: rgba(255, 255, 255, 0.02);
+    border-left: 3px solid var(--color-neon-blue); /* Borde solo a la izquierda */
+    padding: 2rem;
+    border-radius: 0 10px 10px 0;
+    transition: transform 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateX(10px); /* Al pasar el mouse se mueve a la derecha */
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.stars {
+    color: #FFD700; /* Color Dorado para las estrellas */
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.review-text {
+    font-style: italic;
+    color: var(--color-text-gray);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.reviewer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.reviewer-name {
+    font-family: var(--font-title);
+    font-weight: 700;
+    color: var(--color-text-light);
+}
+
+.reviewer-badge {
+    background: rgba(0, 229, 255, 0.1);
+    color: var(--color-neon-blue);
+    padding: 2px 8px;
+    font-size: 0.7rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* ================= FOOTER ================= */
+.footer-section {
+    background-color: #020202;
+    padding: 5rem 0 2rem;
+    border-top: 1px solid rgba(0, 229, 255, 0.1);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-logo {
+    font-family: var(--font-title);
+    color: var(--color-text-light);
+    margin-bottom: 1rem;
+}
+
+.footer-text {
+    color: var(--color-text-gray);
+    line-height: 1.6;
+    font-size: 0.9rem;
+}
+
+.footer-col h4 {
+    font-family: var(--font-title);
+    color: var(--color-text-light);
+    margin-bottom: 1.2rem;
+    font-size: 1.1rem;
+}
+
+.footer-links, .contact-list {
+    list-style: none;
+}
+
+.footer-links li, .contact-list li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: var(--color-text-gray);
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--color-neon-blue);
+}
+
+.contact-link {
+    text-decoration: none;
+    color: var(--color-text-gray);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.contact-link i {
+    font-size: 1.2rem;
+    color: var(--color-neon-blue);
+}
+
+.location {
+    color: var(--color-text-gray);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.location i {
+    color: var(--color-neon-blue);
+}
+
+.contact-link:hover {
+    color: var(--color-text-light);
+    transform: translateX(5px);
+}
+
+.contact-link.whatsapp:hover i {
+    color: #25D366;
+    text-shadow: 0 0 10px #25D366;
+}
+
+.contact-link.instagram:hover i {
+    color: #E1306C;
+    text-shadow: 0 0 10px #E1306C;
+}
+
+.footer-bar {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--color-text-gray);
+    font-size: 0.85rem;
+}
+
+/* ================= MEDIA QUERY (CELULARES FINAL) ================= */
+@media (max-width: 768px) {
+    
+    /* 1. Navbar: Aseguramos que nada se salga de los bordes */
+    .navbar {
+        padding: 1rem 15px; /* Márgenes laterales seguros */
+        justify-content: space-between;
+    }
+
+    /* 2. Logo: Lo achicamos para que entre "ZEUS COMPUTACIÓN" */
+    .nav-logo {
+        font-size: 0.85rem; /* Letra mucho más chica */
+        letter-spacing: 0; /* Quitamos espacio entre letras */
+        z-index: 101;
+        max-width: 75%; /* Le dejamos espacio al botón hamburguesa */
+        white-space: nowrap; /* Evitamos que se rompa en dos renglones */
+    }
+
+    /* 3. Menú Hamburguesa */
+    .menu-toggle {
+        display: block;
+        font-size: 1.5rem; /* Un poco más chico para equilibrar */
+        color: var(--color-text-light);
+        z-index: 102;
+        cursor: pointer;
+    }
+
+    /* 4. Menú Desplegable (Fondo y posición) */
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: -100%;
+        width: 100%;
+        height: 100vh; /* Pantalla completa */
+        background-color: rgba(5, 5, 5, 0.98);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: left 0.4s ease;
+        border-bottom: 2px solid var(--color-neon-blue);
+        display: flex;
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    .nav-links li {
+        margin: 1.5rem 0;
+        font-size: 1.3rem;
+    }
+
+    /* 5. Título Hero: Ajuste crítico para que no se corte */
+    .hero-title {
+        font-size: 1.5rem; /* Mucho más chico que en PC */
+        line-height: 1.2;
+        padding: 0 10px; /* Margen para que no toque los bordes */
+        width: 100%;
+        word-wrap: break-word; /* Si una palabra es larguísima, la corta */
+    }
+    
+    .hero-subtitle {
+        font-size: 0.9rem;
+        padding: 0 20px;
+        width: 100%;
+    }
+    
+    /* Imagen del Gato: Más chica */
+    .main-logo-img {
+        max-width: 160px;
+    }
+    
+    /* Circuitos: Los ocultamos o hacemos muy tenues en celular para limpiar la vista */
+    .circuit-deco {
+        width: 100px;
+        opacity: 0.2;
+    }
+    
+    /* El contenedor principal no debe exceder el ancho */
+    .hero-content {
+        width: 100%;
+        overflow: hidden; /* Corta cualquier cosa que se salga */
+        padding: 0 10px;
+    }
+
+    /* Ajustes de formularios y footer para que no se desborden */
+    .tracking-form, .footer-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    
+    .tracking-input {
+        width: 100%; /* Que ocupe el ancho disponible */
+        box-sizing: border-box; /* Importante para que el padding no sume ancho */
+    }
+    
+    .tracking-form button {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+/* ================= CIRCUITOS ANIMADOS (NUEVO) ================= */
+
+/* 1. El contenedor principal que ubica el circuito */
+.circuit-container {
+    position: absolute;
+    pointer-events: none;
+    width: 300px; /* Tamaño base en PC */
+    max-width: 40%;
+    /* Un resplandor general suave para todo el conjunto */
+    filter: drop-shadow(0 0 8px var(--color-neon-blue));
+}
+
+/* Ubicación específica (igual que antes) */
+.top-left-container {
+    top: 60px;
+    left: 0;
+}
+
+.bottom-right-container {
+    bottom: 0;
+    right: 0;
+}
+
+/* 2. La imagen base estática (para que siempre se vea el circuito) */
+.circuit-base {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 0.6; /* Un poco transparente para que la energía resalte más */
+}
+
+/* 3. La capa de energía animada (La Magia) */
+.circuit-energy {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Este gradiente es el "rayo" de luz. 
+       Es transparente, luego luz blanca/cian brillante, luego transparente de nuevo */
+    background: linear-gradient(
+        90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.8) 30%, 
+        var(--color-neon-blue) 50%, 
+        transparent 80%
+    );
+    background-size: 200% auto; /* Hacemos el fondo el doble de ancho para poder moverlo */
+    
+    /* La animación que mueve el gradiente */
+    animation: energyFlow 3s linear infinite; 
+    
+    /* MÁSCARA: Esto hace que el gradiente solo se vea sobre las líneas de la imagen */
+    /* Usamos la misma imagen del circuito como molde de recorte */
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    /* Usamos mix-blend para que la luz se "súme" a la imagen de abajo */
+    mix-blend-mode: screen; 
+}
+
+/* Definimos qué imagen usa cada máscara */
+.mask-top {
+    -webkit-mask-image: url('../assets/img/circuito-top.png');
+    mask-image: url('../assets/img/circuito-top.png');
+}
+
+.mask-bottom {
+    -webkit-mask-image: url('../assets/img/circuito-bottom.png');
+    mask-image: url('../assets/img/circuito-bottom.png');
+}
+
+/* 4. Definición de la animación */
+@keyframes energyFlow {
+    0% {
+        background-position: -100% 0; /* Empieza fuera a la izquierda */
+    }
+    100% {
+        background-position: 200% 0; /* Termina fuera a la derecha */
+    }
+}
+
+/* AJUSTE RESPONSIVE PARA CELULAR */
+@media (max-width: 768px) {
+    /* Achicamos el contenedor en celular */
+    .circuit-container {
+        width: 150px;
+    }
+    /* En celular la base es más transparente para no molestar */
+    .circuit-base {
+        opacity: 0.3;
+    }
+}
+
+/* Estilos extra para la Ficha Técnica Completa */
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 10px;
+}
+
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    font-family: var(--font-title);
+}
+
+.timeline-box {
+    margin: 15px 0;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+}
+
+.timeline-item {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed rgba(255,255,255,0.1);
+}
+
+.timeline-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.cost-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 229, 255, 0.1); /* Fondo Cian suave */
+    padding: 1rem;
+    border-radius: 6px;
+    margin-top: 15px;
+    border: 1px solid var(--color-neon-blue);
+}
+
+.price-tag {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-neon-blue);
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+.date-delivery {
+    text-align: right;
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 10px;
+}
+
+/* Ajuste para los dos inputs */
+.tracking-form {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap; /* Importante para que bajen en celular */
+}
+
+.tracking-input {
+    flex: 1; /* Que intenten ocupar el mismo espacio */
+    min-width: 200px; /* Pero que no sean microscópicos */
+}
+
+/* En celular, que ocupen todo el ancho y se pongan uno abajo del otro */
+@media (max-width: 600px) {
+    .tracking-input {
+        flex: 100%; 
+        width: 100%;
+    }
+}
