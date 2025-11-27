@@ -938,3 +938,141 @@ body {
     border-color: var(--color-neon-blue);
     box-shadow: 0 0 10px rgba(0, 229, 255, 0.1);
 }
+/* ================= TESTIMONIOS SWIPER ================= */
+.testimonials-section {
+    padding: 5rem 0;
+    background: linear-gradient(to bottom, var(--color-bg-main), var(--color-bg-secondary));
+}
+
+/* 1. Ajuste del Contenedor Principal */
+.swiper {
+    width: 100%;
+    /* Aumentamos el padding lateral para dejar espacio a las flechas fuera */
+    padding: 20px 50px 60px 50px; 
+}
+
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 300px; /* Ancho base */
+    height: auto;
+}
+
+/* 2. Ajuste de las Tarjetas (Para que sean iguales) */
+.review-card {
+    background: rgba(255, 255, 255, 0.02);
+    border-left: 3px solid var(--color-neon-blue);
+    padding: 2rem;
+    border-radius: 0 10px 10px 0;
+    
+    /* TRUCO: Altura fija mínima para que se vean todas alineadas */
+    height: 100%; 
+    min-height: 250px; /* Asegura que no queden muy chatas */
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribuye el contenido (estrellas arriba, nombre abajo) */
+    
+    /* Sombra suave para darle profundidad */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+/* 3. Flechas FUERA del contenido */
+.swiper-button-next, .swiper-button-prev {
+    color: var(--color-neon-blue);
+    background: rgba(0, 0, 0, 0.8); /* Fondo más oscuro para resaltar */
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid var(--color-neon-blue);
+    
+    /* Posición absoluta para sacarlas a los costados */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.swiper-button-prev {
+    left: 10px; /* Pegada al borde izquierdo de la pantalla */
+}
+
+.swiper-button-next {
+    right: 10px; /* Pegada al borde derecho */
+}
+/* Efecto Hover en las flechas */
+.swiper-button-next:hover, .swiper-button-prev:hover {
+    background: var(--color-neon-blue);
+    color: #000;
+    box-shadow: 0 0 20px var(--color-neon-blue);
+}
+
+/* Personalizar Puntitos */
+.swiper-pagination-bullet {
+    background: #555;
+    opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+    background: var(--color-neon-blue);
+    box-shadow: 0 0 10px var(--color-neon-blue);
+}
+/* RESPONSIVE: En celular las flechas pueden molestar, las achicamos o acercamos */
+@media (max-width: 768px) {
+    .swiper {
+        padding: 20px 0 50px 0; /* Quitamos padding lateral en celular */
+    }
+    .swiper-button-next, .swiper-button-prev {
+        display: none; /* Ocultamos flechas en celular (se usa el dedo) */
+    }
+}
+/* ================= FLECHAS PERSONALIZADAS SWIPER ================= */
+
+/* 1. Ocultar las flechas por defecto de Swiper */
+.swiper-button-next::after, .swiper-button-prev::after {
+    display: none !important;
+}
+
+/* 2. Estilo del contenedor de la flecha */
+.swiper-button-next, .swiper-button-prev {
+    /* Quitamos el fondo negro pesado y el borde */
+    background: transparent;
+    border: none;
+    width: auto; /* Que se adapte al tamaño del ícono */
+    height: auto;
+    
+    /* Posicionamiento (igual que antes) */
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    cursor: pointer;
+    
+    /* Centrar el ícono */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+/* Ubicación */
+.swiper-button-prev { left: 10px; }
+.swiper-button-next { right: 10px; }
+
+/* 3. Estilo de TUS íconos Font Awesome (Tamaño y Color) */
+.swiper-button-prev i, .swiper-button-next i {
+    font-size: 3rem; /* Íconos grandes y limpios */
+    color: var(--color-neon-blue); /* Color Neón */
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.3); /* Un poco de brillo */
+    transition: all 0.3s ease;
+}
+
+/* Efecto Hover: Agrandar un poquito y más brillo */
+.swiper-button-next:hover i, .swiper-button-prev:hover i {
+    transform: scale(1.2);
+    text-shadow: 0 0 20px var(--color-neon-blue);
+}
+
+/* RESPONSIVE: Ocultar en celular */
+@media (max-width: 768px) {
+    .swiper-button-next, .swiper-button-prev {
+        display: none;
+    }
+}

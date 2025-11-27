@@ -248,51 +248,89 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-    /* =========================================
-       6. CARGAR COMENTARIOS REALES
+   /* =========================================
+       6. CARGAR COMENTARIOS + SWIPER INFINITO
     ========================================= */
-    const contenedorTestimonios = document.querySelector('.testimonials-grid');
+    const reviewsContainer = document.getElementById('reviews-container');
 
-    if (contenedorTestimonios) {
-        // Pedimos los comentarios a Google Sheets
+    if (reviewsContainer) {
+        // 1. Pedimos comentarios
         fetch(`${SCRIPT_URL}?action=comentarios`)
             .then(response => response.json())
             .then(data => {
+                // Preparamos los comentarios (Reales + Ejemplos para que no quede vacío)
+                let comentariosAmostrar = [];
+                
+                // Si hay reales, los ponemos primero
                 if (data.tipo === "comentarios" && data.datos.length > 0) {
+                    comentariosAmostrar = data.datos;
+                }
+                
+                // Agregamos algunos ejemplos fijos si hay pocos reales (para rellenar el slider)
+                if (comentariosAmostrar.length < 3) {
+                    comentariosAmostrar.push(
+                        { nombre: "Lucas M.", mensaje: "Mi PC volaba de temperatura. Ahora corre a 144fps estables.", puntos: 5, esEjemplo: true },
+                        { nombre: "Sofía R.", mensaje: "Armé mi setup con ellos. El cable management quedó impecable.", puntos: 5, esEjemplo: true },
+                        { nombre: "Matías G.", mensaje: "Revivieron mi notebook vieja para la facultad.", puntos: 4, esEjemplo: true }
+                    );
+                }
+
+                // 2. Generamos el HTML (Slide por Slide)
+                comentariosAmostrar.forEach(review => {
+                    let estrellasHTML = '';
+                    for (let i = 1; i <= 5; i++) {
+                        estrellasHTML += (i <= review.puntos) ? '<i class="fa-solid fa-star"></i>' : '<i class="fa-regular fa-star"></i>';
+                    }
                     
-                    // Opcional: Si quieres borrar los testimonios de ejemplo, descomenta la siguiente línea:
-                    // contenedorTestimonios.innerHTML = ""; 
+                    // Definimos colores según si es real o ejemplo
+                    const bordeColor = review.esEjemplo ? '#00e5ff' : '#00e5ff'; // Puedes cambiarlo si quieres distinguir
+                    const badgeHTML = review.esEjemplo 
+                        ? `<span class="reviewer-badge">GAMER</span>`
+                        : `<span class="reviewer-badge" style="background: rgba(0, 229, 255, 0.1); color: #00e5ff;">CLIENTE VERIFICADO</span>`;
 
-                    // Creamos una tarjeta por cada comentario real
-                    data.datos.forEach(review => {
-                        // Generar estrellas dinámicas
-                        let estrellasHTML = '';
-                        for (let i = 1; i <= 5; i++) {
-                            if (i <= review.puntos) {
-                                estrellasHTML += '<i class="fa-solid fa-star"></i>'; // Estrella llena
-                            } else {
-                                estrellasHTML += '<i class="fa-regular fa-star"></i>'; // Estrella vacía
-                            }
-                        }
-
-                        // --- CÓDIGO CORREGIDO (Color Azul y Mensaje Correcto) ---
-                        const htmlReview = `
-                        <div class="review-card" style="border-left-color: #00e5ff;"> <div class="stars" style="color: #FFD700;">
-                                ${estrellasHTML}
-                            </div>
-                            <p class="review-text">"${review.mensaje}"</p> 
+                    const slideHTML = `
+                    <div class="swiper-slide">
+                        <div class="review-card" style="border-left-color: ${bordeColor};">
+                            <div class="stars" style="color: #FFD700;">${estrellasHTML}</div>
+                            <p class="review-text">"${review.mensaje}"</p>
                             <div class="reviewer">
                                 <span class="reviewer-name">${review.nombre}</span>
-                                <span class="reviewer-badge" style="background: rgba(0, 229, 255, 0.1); color: #00e5ff;">CLIENTE VERIFICADO</span>
+                                ${badgeHTML}
                             </div>
                         </div>
-                        `;
-                        
-                        // Agregamos el comentario AL PRINCIPIO de la lista
-                        contenedorTestimonios.insertAdjacentHTML('afterbegin', htmlReview);
-                    });
-                }
+                    </div>`;
+                    
+                    reviewsContainer.innerHTML += slideHTML;
+                });
+
+                // 3. INICIAMOS SWIPER (LA MAGIA)
+                new Swiper(".mySwiper", {
+                    slidesPerView: 1, // En celular se ve 1
+                    spaceBetween: 30,
+                    loop: true, // ¡ESTO HACE EL EFECTO INFINITO!
+                    autoplay: {
+                        delay: 3000,
+                        disableOnInteraction: false,
+                    },
+                    pagination: {
+                        el: ".swiper-pagination",
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: ".swiper-button-next",
+                        prevEl: ".swiper-button-prev",
+                    },
+                    breakpoints: {
+                        768: {
+                            slidesPerView: 2, // Tablet: 2 tarjetas
+                        },
+                        1024: {
+                            slidesPerView: 3, // PC: 3 tarjetas
+                        },
+                    },
+                });
+
             })
-            .catch(error => console.error("Error cargando comentarios:", error));
+            .catch(error => console.error("Error Swiper:", error));
     }
 });

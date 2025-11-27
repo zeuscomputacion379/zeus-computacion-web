@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
     <link rel="stylesheet" href="./css/style.css">
 </head>
@@ -144,75 +145,22 @@
             <h2 class="section-title">LO QUE DICEN LOS <span class="text-neon">GAMERS</span></h2>
             <p class="section-subtitle">La confianza se gana partida a partida.</p>
 
-            <div class="testimonials-grid">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper" id="reviews-container">
+                    </div>
                 
-                <div class="review-card">
-                    <div class="stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                    </div>
-                    <p class="review-text">"Mi PC volaba de temperatura y se apagaba sola. Zeus le hizo un mantenimiento completo y ahora corre el Warzone a 144fps estables. Unos genios."</p>
-                    <div class="reviewer">
-                        <span class="reviewer-name">Lucas M.</span>
-                        <span class="reviewer-badge">Gamer</span>
-                    </div>
-                </div>
+                <div class="swiper-pagination"></div>
 
-                <div class="review-card">
-                    <div class="stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                    </div>
-                    <p class="review-text">"Armé mi setup con ellos. Me asesoraron para no gastar de más y el cable management quedó impecable. Súper recomendados en Mendoza."</p>
-                    <div class="reviewer">
-                        <span class="reviewer-name">Sofía R.</span>
-                        <span class="reviewer-badge">Diseñadora</span>
-                    </div>
+                <div class="swiper-button-prev">
+                    <i class="fa-solid fa-chevron-left"></i>
                 </div>
-
-                <div class="review-card">
-                    <div class="stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star-half-stroke"></i>
-                    </div>
-                    <p class="review-text">"Revivieron mi notebook vieja para la facultad. Pensé que tenía que comprar una nueva, pero con el SSD que le pusieron vuela."</p>
-                    <div class="reviewer">
-                        <span class="reviewer-name">Matías G.</span>
-                        <span class="reviewer-badge">Estudiante</span>
-                    </div>
+                <div class="swiper-button-next">
+                    <i class="fa-solid fa-chevron-right"></i>
                 </div>
-
+            </div>
             </div>
         </div>
-            <section class="comment-form-section">
-                <div class="container">
-                    <h3 class="form-title">¿YA SOS CLIENTE? <span class="text-neon">DEJANOS TU OPINIÓN</span></h3>
-                    
-                    <div class="form-box">
-                        <div class="star-rating">
-                            <span class="star" data-value="1"><i class="fa-solid fa-star"></i></span>
-                            <span class="star" data-value="2"><i class="fa-solid fa-star"></i></span>
-                            <span class="star" data-value="3"><i class="fa-solid fa-star"></i></span>
-                            <span class="star" data-value="4"><i class="fa-solid fa-star"></i></span>
-                            <span class="star" data-value="5"><i class="fa-solid fa-star"></i></span>
-                        </div>
-                        <input type="hidden" id="rating-value" value="5"> <input type="text" id="comment-name" placeholder="Tu Nombre" class="neon-input">
-                        <textarea id="comment-text" placeholder="Contanos tu experiencia..." class="neon-input" rows="3"></textarea>
-                        
-                        <button id="btn-enviar-review" class="btn btn-primary glow-effect">PUBLICAR RESEÑA</button>
-                    </div>
-                </div>
-            </section>
-    </section>
+        </section>
 
     <section id="seguimiento" class="tracking-section">
         <div class="container tracking-container">
@@ -280,6 +228,7 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="./js/script.js"></script>
 
 </body>
