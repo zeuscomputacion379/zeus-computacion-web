@@ -1044,22 +1044,24 @@ body {
         display: none; /* Ocultamos flechas en celular (se usa el dedo) */
     }
 }
-/* ================= FLECHAS PERSONALIZADAS SWIPER ================= */
+/* ================= FLECHAS PERSONALIZADAS SWIPER (SOLO ÍCONO) ================= */
 
 /* 1. Ocultar las flechas por defecto de Swiper */
 .swiper-button-next::after, .swiper-button-prev::after {
     display: none !important;
 }
 
-/* 2. Estilo del contenedor de la flecha */
+/* 2. Estilo del contenedor (SIN FONDO) */
 .swiper-button-next, .swiper-button-prev {
-    /* Quitamos el fondo negro pesado y el borde */
-    background: transparent;
-    border: none;
+    /* Quitamos cualquier fondo, borde o sombra del contenedor */
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    
     width: auto; /* Que se adapte al tamaño del ícono */
     height: auto;
     
-    /* Posicionamiento (igual que antes) */
+    /* Posicionamiento */
     top: 50%;
     transform: translateY(-50%);
     z-index: 10;
@@ -1069,25 +1071,25 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
 }
 
 /* Ubicación */
 .swiper-button-prev { left: 10px; }
 .swiper-button-next { right: 10px; }
 
-/* 3. Estilo de TUS íconos Font Awesome (Tamaño y Color) */
+/* 3. Estilo de TUS íconos Font Awesome (La flecha en sí) */
 .swiper-button-prev i, .swiper-button-next i {
-    font-size: 3rem; /* Íconos grandes y limpios */
+    font-size: 3.5rem; /* Un poco más grandes para que impacten */
     color: var(--color-neon-blue); /* Color Neón */
-    text-shadow: 0 0 10px rgba(0, 229, 255, 0.3); /* Un poco de brillo */
-    transition: all 0.3s ease;
+    text-shadow: 0 0 15px rgba(0, 229, 255, 0.6); /* Brillo intenso */
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animación con rebote suave */
 }
 
-/* Efecto Hover: Agrandar un poquito y más brillo */
+/* Efecto Hover: Agrandar SOLO la flecha */
 .swiper-button-next:hover i, .swiper-button-prev:hover i {
-    transform: scale(1.2);
-    text-shadow: 0 0 20px var(--color-neon-blue);
+    transform: scale(1.25); /* Se agranda */
+    text-shadow: 0 0 30px var(--color-neon-blue); /* Mucho más brillo */
+    color: #fff; /* Opcional: que se ponga blanca al pasar el mouse para más contraste */
 }
 
 /* RESPONSIVE: Ocultar en celular */
