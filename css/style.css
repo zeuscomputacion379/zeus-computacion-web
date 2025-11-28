@@ -61,6 +61,26 @@ body {
     font-size: 1.2rem;
     letter-spacing: 1px;
     z-index: 101;
+    
+    /* ESTILOS DE ENLACE CORREGIDOS */
+    text-decoration: none !important; /* Quita el subrayado */
+    color: var(--color-text-light) !important; /* Color blanco forzado */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-logo:hover {
+    color: var(--color-neon-blue) !important; /* Se pone azul neón */
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.5); /* Brilla un poco */
+}
+
+/* Ajuste responsive para el logo */
+@media (max-width: 768px) {
+    .nav-logo {
+        font-size: 0.85rem;
+        max-width: 75%;
+        white-space: nowrap;
+    }
 }
 
 .nav-links {
@@ -1074,5 +1094,44 @@ body {
 @media (max-width: 768px) {
     .swiper-button-next, .swiper-button-prev {
         display: none;
+    }
+}
+
+/* ================= WHATSAPP FLOTANTE ================= */
+.btn-whatsapp-float {
+    position: fixed; /* Se queda fijo en la pantalla */
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #25D366; /* Verde oficial WhatsApp */
+    color: white;
+    border-radius: 50%; /* Lo hace redondo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px; /* Tamaño del icono */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Sombra */
+    z-index: 1000; /* Asegura que esté siempre ARRIBA de todo */
+    transition: all 0.3s ease;
+    text-decoration: none;
+    border: 2px solid white; /* Borde blanco para resaltar en fondo negro */
+}
+
+/* Efecto al pasar el mouse */
+.btn-whatsapp-float:hover {
+    transform: scale(1.1); /* Se agranda un poquito */
+    box-shadow: 0 0 20px #25D366; /* Brillo verde */
+    background-color: #128C7E; /* Un verde un poco más oscuro */
+}
+
+/* Ajuste para celular (un poco más chico para no tapar tanto) */
+@media (max-width: 768px) {
+    .btn-whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 28px;
     }
 }
