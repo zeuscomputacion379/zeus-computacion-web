@@ -1,0 +1,16 @@
+Instagram de Zeus Computación: https://www.instagram.com/zeus.computacion/
+
+Hoja de Cálculo (Base de datos de estados y comentarios): 
+https://docs.google.com/spreadsheets/d/1RBN6EWMUJoYQ59xZ1r-lGmwlO7tiveyXDBA9JRKTQ4g/edit?usp=sharing
+
+Google Apps Script (URL de la API implementada): 
+https://script.google.com/macros/s/AKfycbx1Ch6e1UsU4-kzXoz9QDYnZvGrJv1WXdoqJ93iGkLd9RrFZAm1e5zQp9JUS4EQhQh_7Q/exec
+
+Repositorio de GitHub: 
+https://github.com/zeuscomputacion379/zeus-computacion-web.git
+
+Página web publicada: https://zeus-computacion.netlify.app/
+
+Netlify Drop (Plataforma de despliegue sugerida): https://app.netlify.com/drop
+
+Enlace de contacto de WhatsApp: https://wa.me/5492614724921
