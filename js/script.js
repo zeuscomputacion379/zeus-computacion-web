@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
        3. CONSULTA DE ESTADO (CONEXIÓN GOOGLE SHEETS)
     ========================================= */
     // CONEXIÓN CON TU GOOGLE SHEET (API ZEUS)
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzT53rll12oXQK3TLVe6hZGvImWX-VryRDb5KpuFf8qn4a8E2AIMiQyVHNwO8l9SlF6qA/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx1Ch6e1UsU4-kzXoz9QDYnZvGrJv1WXdoqJ93iGkLd9RrFZAm1e5zQp9JUS4EQhQh_7Q/exec";
 
     const trackingBtn = document.querySelector('.tracking-form button');
     // Seleccionamos los inputs por su ID nuevo
